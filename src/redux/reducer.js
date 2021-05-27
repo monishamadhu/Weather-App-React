@@ -1,15 +1,21 @@
 import * as ActionTypes from './ActionTypes';
 
-export const WeatherForecast = (state = {
+export const weatherForecast = (state = {
         errMess:null,
-        weather:[]
+        isLoading: false,
+        data:null
     }, action) => {
-    switch(action.type) {
-        case ActionTypes.ADD_WEATHER:
-            return{ ...state, errMess:null, weather:action.payload}
+    
+        switch(action.type) {
+        case ActionTypes.GET_WEATHER:
+            return{ ...state, errMess:null, isLoading:false, data:action.payload}
         
-        case ActionTypes.PROMOS_FAILED:
-            return {...state, errMess: action.payload, weather:[] }
+        case ActionTypes.WEATHER_LOADING:
+            return{ ...state, errMess:null, isLoading:true, data:null}
+        
+        case ActionTypes.WEATHER_FAILED:
+            return {...state, errMess: action.payload, isLoading:false, data: null }
+        
         default:
             return state;
     }

@@ -1,3 +1,5 @@
+import React from 'react';
+import { Loading } from './LoadingComponent';
 
 function RenderWeather(props) {
     return (

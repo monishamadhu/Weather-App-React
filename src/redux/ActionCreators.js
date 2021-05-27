@@ -1,9 +1,9 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl,key } from '../baseUrl';
 
-export const fetchWeather = () => (dispatch) => {
+export const fetchWeather = (city) => (dispatch) => {
         
-    return fetch(baseUrl + +',us&&appid='+key)
+    return fetch(`${baseUrl}${city},us&&appid=${key}`)
     .then(response => {
         if(response.ok){
             return response;
@@ -18,7 +18,7 @@ export const fetchWeather = () => (dispatch) => {
         throw errmess;
     })
     .then(response => response.json())
-    .then(weather => dispatch(addWeather(weather)))
+    .then(weather => dispatch(getWeather(weather)))
     .catch(error => dispatch(weatherFailed(error.message)));
 }
 
@@ -27,7 +27,7 @@ export const weatherFailed = (errmess) => ({
     payload: errmess
 });
 
-export const addWeather = (weather) => ({
-    type: ActionTypes.ADD_WEATHER,
+export const getWeather = (weather) => ({
+    type: ActionTypes.GET_WEATHER,
     payload: weather
 });
